@@ -1,0 +1,113 @@
+:root {
+  --clr-primary-purple: hsl(259, 100%, 65%);
+  --clr-primary-red: hsl(0, 100%, 67%);
+
+  --clr-neutral-white: hsl(0, 0%, 100%);
+  --clr-neutral-offWhite: hsl(0, 0%, 100%);
+  --clr-neutral-lightGrey: hsl(0, 0%, 86%);
+  --clr-neutral-smokeyGrey: hsl(0, 1%, 44%);
+  --clr-neutral-OffBlack: hsl(0, 0%, 8%);
+
+  --fs-vBig: 4rem;
+  --fs-big: 2rem;
+  --fs-small: 1rem;
+}
+
+.clr-purple {
+  color: var(--clr-primary-purple);
+}
+
+.clr-red {
+  color: var(--clr-primary-red);
+}
+
+.clr-black {
+  color: var(--clr-neutral-OffBlack);
+}
+
+.clr-grey {
+  color: var(--clr-neutral-smokeyGrey);
+}
+
+.fs-big {
+  font-size: var(--fs-big);
+}
+.fs-vBig {
+  font-size: var(--fs-vBig);
+}
+.fs-small {
+  font-size: var(--fs-small);
+}
+
+.fw-bold {
+  font-weight: 700;
+}
+
+.fw-italicBold {
+  font-weight: 800;
+  font-style: italic;
+}
+
+.fw-light {
+  font-weight: 400;
+  font-style: italic;
+}
+
+.flex {
+  display: flex;
+  gap: 1rem;
+}
+
+.attribution {
+  font-size: 11px;
+  text-align: center;
+}
+.attribution a {
+  color: hsl(228, 45%, 44%);
+}
+
+/*make input of type number without an arrow */
+/* For firefox : */
+input[type="number"] {
+  appearance: textfield;
+  padding: 1rem;
+  width: 10rem;
+  margin-block: 0.5rem;
+  border-radius: 10px;
+  border: 1px solid var(--clr-neutral-lightGrey);
+}
+/* For chrome, Safari, Edge, Opera : */
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
+label {
+  display: block;
+}
+
+body {
+  font-family: "Poppins", sans-serif;
+  background-color: var(--clr-neutral-lightGrey);
+}
+
+.main {
+  background-color: var(--clr-neutral-offWhite);
+  width: 50rem;
+  border-radius: 20px 20px 200px 20px;
+  margin-inline: auto;
+  margin-block: 4rem;
+  padding: 2rem;
+
+  flex-direction: column;
+  align-items: center;
+}
+
+*,
+*::after,
+*::before {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
