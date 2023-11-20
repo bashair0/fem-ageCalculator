@@ -8,7 +8,7 @@
   --clr-neutral-smokeyGrey: hsl(0, 1%, 44%);
   --clr-neutral-OffBlack: hsl(0, 0%, 8%);
 
-  --fs-vBig: 4rem;
+  --fs-vBig: 3rem;
   --fs-big: 2rem;
   --fs-small: 1rem;
 }
@@ -55,6 +55,8 @@
 
 .flex {
   display: flex;
+}
+form {
   gap: 1rem;
 }
 
@@ -70,8 +72,9 @@
 /* For firefox : */
 input[type="number"] {
   appearance: textfield;
-  padding: 1rem;
+
   width: 10rem;
+  padding: 1rem;
   margin-block: 0.5rem;
   border-radius: 10px;
   border: 1px solid var(--clr-neutral-lightGrey);
@@ -94,14 +97,43 @@ body {
 
 .main {
   background-color: var(--clr-neutral-offWhite);
-  width: 50rem;
+  max-width: 50rem;
   border-radius: 20px 20px 200px 20px;
   margin-inline: auto;
   margin-block: 4rem;
-  padding: 2rem;
+  padding: 3rem;
 
   flex-direction: column;
+  align-items: flex-start;
+}
+
+.icon {
+  width: 100%;
+  justify-content: center;
   align-items: center;
+  flex: auto;
+}
+
+button {
+  background: none;
+  border: none;
+}
+
+.icon img {
+  background-color: var(--clr-primary-purple);
+  cursor: pointer;
+  padding: 1rem;
+  border-radius: 50%;
+}
+
+.icon img:hover {
+  background-color: var(--clr-neutral-OffBlack);
+}
+
+.line {
+  display: block;
+  width: 100%;
+  border: 1px solid var(--clr-neutral-lightGrey);
 }
 
 *,
