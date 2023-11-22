@@ -86,6 +86,11 @@ input::-webkit-inner-spin-button {
   margin: 0;
 }
 
+input:focus {
+  outline: none;
+  border-color: hsl(259, 28%, 52%);
+}
+
 @media (max-width: 43.125em) {
   input[type="number"] {
     width: 8rem;
@@ -130,37 +135,39 @@ body {
   }
 }
 
-.icon {
+.btn-container {
   width: 100%;
   justify-content: center;
   align-items: center;
-  flex: auto;
 }
 
+/* button and submit-btn both refers to the same element I wrote it like this in case for future changes if we want to add another button */
 button {
-  background: none;
   border: none;
-}
-
-.icon img {
-  background-color: var(--clr-primary-purple);
   cursor: pointer;
-  padding: 1rem;
-  border-radius: 50%;
 }
 
-.icon img:hover {
+.submit-btn {
+  background-color: var(--clr-primary-purple);
+  border-radius: 50%;
+  padding: 1rem;
+
+  transition: background-color 0.3s ease-in-out;
+}
+
+.submit-btn:hover,
+.submit-btn:focus {
   background-color: var(--clr-neutral-OffBlack);
 }
 
 /* Change the button position to center on small screen sizes */
 @media (max-width: 50.625em) {
-  .icon {
+  .btn-container {
     position: relative;
     margin-block: 3rem;
   }
 
-  button {
+  .submit-btn {
     position: absolute;
   }
 }
@@ -177,4 +184,9 @@ button {
   box-sizing: border-box;
   margin: 0;
   padding: 0;
+}
+
+svg {
+  max-width: 100%;
+  display: block;
 }
