@@ -16,6 +16,7 @@
       sizes="32x32"
       href="./assets/images/favicon-32x32.png" />
     <link rel="stylesheet" href="style.css" />
+    <script type="module" src="index.js" defer></script>
 
     <title>Frontend Mentor | Age calculator app</title>
   </head>
@@ -29,6 +30,9 @@
             id="day"
             type="number"
             placeholder="DD" />
+          <p class="err-msg fw-light fs-small clr-red">
+            This field is required
+          </p>
         </div>
         <div class="box">
           <label for="month" class="clr-grey">Month</label>
@@ -37,6 +41,9 @@
             id="month"
             type="number"
             placeholder="MM" />
+          <p class="err-msg fw-light fs-small clr-red">
+            This field is required
+          </p>
         </div>
         <div class="box">
           <label for="year" class="clr-grey">Year</label>
@@ -45,6 +52,9 @@
             id="year"
             type="number"
             placeholder="YYYY" />
+          <p class="err-msg fw-light fs-small clr-red">
+            This field is required
+          </p>
         </div>
       </form>
       <div class="btn-container flex">
