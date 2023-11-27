@@ -8,7 +8,15 @@ const primaryRed = rootStyles.getPropertyValue('--clr-primary-red')
 
 function checkYearValidation (birthYear) {
   const currentYear = new Date().getFullYear()
-  return birthYear <= currentYear ? true : 'Must be in the past'
+  return birthYear <= currentYear ? true : false /* 'Must be in the past' */
+}
+
+function adjustLeapYear (year) {
+  if ((year % 4 === 0 && year % 100 !== 0) || year % 400 === 0) {
+    return 29
+  } else {
+    return 28
+  }
 }
 
 function checkMonthValidation (birthMonth) {
@@ -17,11 +25,11 @@ function checkMonthValidation (birthMonth) {
 
 function checkMonth (birthMonth) {
   if (!checkMonthValidation(birthMonth)) {
-    return 'Must be a valid month'
+    return false /* 'Must be a valid month' */
   } else {
     let days = 31
     if (birthMonth === 2) {
-      days = 28
+      days = adjustLeapYear(2012)
     } else if (
       birthMonth === 4 ||
       birthMonth === 6 ||
@@ -34,7 +42,9 @@ function checkMonth (birthMonth) {
   }
 }
 
-console.log(checkMonth(1))
+function checkDateValidation (date) {
+  return date < 1 || date > 31 ? false : true
+}
 
 function checkEmptyInput () {
   inputField.forEach(i => {
