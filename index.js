@@ -148,17 +148,6 @@ function calculateAge () {
   let birthMonth = monthInput.value
   let birthYear = yearInput.value
 
-  if (
-    checkValidation(checkDateValidation()) &&
-    checkValidation(checkMonthValidation()) &&
-    checkValidation(checkYearValidation())
-  ) {
-    yearAge.textContent = currentYear - birthYear
-    monthAge.textContent = currentMonth - birthMonth
-    dayAge.textContent = currentDate - birthDate
-  }
-}
-submitBtn.addEventListener('click', () => {
   const checksArray = [
     checkDateValidation(),
     checkMonthValidation(),
@@ -166,7 +155,13 @@ submitBtn.addEventListener('click', () => {
   ]
   checksArray.forEach(check => {
     if (checkValidation(check)) {
-      calculateAge()
+      yearAge.textContent = currentYear - birthYear
+      monthAge.textContent = currentMonth - birthMonth
+      dayAge.textContent = currentDate - birthDate
     }
   })
+}
+
+submitBtn.addEventListener('click', () => {
+  calculateAge()
 })
