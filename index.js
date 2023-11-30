@@ -20,14 +20,11 @@ const currentYear = new Date().getFullYear()
 const currentMonth = new Date().getMonth() + 1
 /* create a variable currentMonth and get the current date value */
 const currentDate = new Date().getDate()
-/* create a birthDate variable and store the dateInput value in it */
-let birthMonth = monthInput.value
-let birthYear = yearInput.value
 
 /* check if any of the inputs are empty */
-/* create a variable emptyInput and check if it was empty return false otherwise return true */
-function checkEmptyInput (emptyInput) {
-  return emptyInput.trim() === '' ? false : true
+/* create a variable inputValue and check if it was empty return false otherwise return true */
+function checkEmptyInput (inputValue) {
+  return inputValue.trim() === '' ? false : true
   /* trim() method just accepts string type values */
 }
 
@@ -120,20 +117,6 @@ function checkIsString (inputValue) {
   return isNaN(inputValue) ? false : true
 }
 
-function calculateAge () {
-  const yearAge = document.querySelector('.year-age')
-  const monthAge = document.querySelector('.month-age')
-  const dayAge = document.querySelector('.day-age')
-
-  let birthDate = Number(dateInput.value)
-  let birthMonth = Number(monthInput.value)
-  let birthYear = Number(yearInput.value)
-
-  yearAge.textContent = currentYear - birthYear
-  monthAge.textContent = currentMonth - birthMonth
-  dayAge.textContent = currentDate - birthDate
-}
-
 function checkValidation (whatever) {
   inputFields.forEach(i => {
     labels.forEach(l => {
@@ -152,13 +135,38 @@ function checkValidation (whatever) {
   }
   return true
 }
+function calculateAge () {
+  const yearAge = document.querySelector('.year-age')
+  const monthAge = document.querySelector('.month-age')
+  const dayAge = document.querySelector('.day-age')
 
-submitBtn.addEventListener('click', () => {
+  yearAge.textContent = '--'
+  monthAge.textContent = '--'
+  dayAge.textContent = '--'
+
+  let birthDate = dateInput.value
+  let birthMonth = monthInput.value
+  let birthYear = yearInput.value
+
   if (
     checkValidation(checkDateValidation()) &&
     checkValidation(checkMonthValidation()) &&
     checkValidation(checkYearValidation())
   ) {
-    calculateAge()
+    yearAge.textContent = currentYear - birthYear
+    monthAge.textContent = currentMonth - birthMonth
+    dayAge.textContent = currentDate - birthDate
   }
+}
+submitBtn.addEventListener('click', () => {
+  const checksArray = [
+    checkDateValidation(),
+    checkMonthValidation(),
+    checkYearValidation()
+  ]
+  checksArray.forEach(check => {
+    if (checkValidation(check)) {
+      calculateAge()
+    }
+  })
 })
