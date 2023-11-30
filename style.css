@@ -111,6 +111,10 @@ input:focus {
   display: none;
 } */
 
+.show-msg {
+  display: block;
+}
+
 .main {
   background-color: var(--clr-neutral-offWhite);
   max-width: 50rem;

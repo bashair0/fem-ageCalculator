@@ -30,9 +30,7 @@
             id="day"
             type="number"
             placeholder="DD" />
-          <p class="err-msg fw-light fs-small clr-red">
-            This field is required
-          </p>
+          <p id="date-validation" class="err-msg fw-light fs-small clr-red"></p>
         </div>
         <div class="box">
           <label for="month" class="clr-grey">Month</label>
@@ -41,9 +39,9 @@
             id="month"
             type="number"
             placeholder="MM" />
-          <p class="err-msg fw-light fs-small clr-red">
-            This field is required
-          </p>
+          <p
+            id="month-validation"
+            class="err-msg fw-light fs-small clr-red"></p>
         </div>
         <div class="box">
           <label for="year" class="clr-grey">Year</label>
@@ -52,9 +50,7 @@
             id="year"
             type="number"
             placeholder="YYYY" />
-          <p class="err-msg fw-light fs-small clr-red">
-            This field is required
-          </p>
+          <p id="year-validation" class="err-msg fw-light fs-small clr-red"></p>
         </div>
       </form>
       <div class="btn-container flex">
@@ -74,13 +70,13 @@
       </div>
 
       <p class="fs-vBig fw-italicBold">
-        <span class="result clr-purple">--</span>years
+        <span class="year-age clr-purple">--</span>years
       </p>
       <p class="fs-vBig fw-italicBold">
-        <span class="result clr-purple">--</span>months
+        <span class="month-age clr-purple">--</span>months
       </p>
       <p class="fs-vBig fw-italicBold">
-        <span class="result clr-purple">--</span>days
+        <span class="day-age clr-purple">--</span>days
       </p>
     </div>
 
