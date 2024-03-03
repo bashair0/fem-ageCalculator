@@ -107,10 +107,6 @@ input:focus {
   }
 }
 
-/* .err-msg {
-  display: none;
-} */
-
 .show-msg {
   display: block;
 }

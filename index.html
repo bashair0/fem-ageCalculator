@@ -23,39 +23,40 @@
   <body>
     <div class="main flex">
       <form action="#" class="flex">
-        <div class="box">
+        <div>
           <label for="day" class="clr-grey">Day</label>
           <input
             class="fs-big fw-bold"
             id="day"
             type="number"
-            placeholder="DD" />
-          <p id="date-validation" class="err-msg fw-light fs-small clr-red"></p>
+            placeholder="DD"
+            data-day-input />
+          <p class="fw-light fs-small clr-red" data-date-errMsg></p>
         </div>
-        <div class="box">
+        <div>
           <label for="month" class="clr-grey">Month</label>
           <input
             class="fs-big fw-bold"
             id="month"
             type="number"
-            placeholder="MM" />
-          <p
-            id="month-validation"
-            class="err-msg fw-light fs-small clr-red"></p>
+            placeholder="MM"
+            data-month-input />
+          <p class="fw-light fs-small clr-red" data-month-errMsg></p>
         </div>
-        <div class="box">
+        <div>
           <label for="year" class="clr-grey">Year</label>
           <input
             class="fs-big fw-bold"
             id="year"
             type="number"
-            placeholder="YYYY" />
-          <p id="year-validation" class="err-msg fw-light fs-small clr-red"></p>
+            placeholder="YYYY"
+            data-year-input />
+          <p class="fw-light fs-small clr-red" data-year-errMsg></p>
         </div>
       </form>
       <div class="btn-container flex">
         <div class="line"></div>
-        <button class="submit-btn" type="submit">
+        <button class="submit-btn" type="submit" data-submit-btn>
           <svg
             xmlns="http://www.w3.org/2000/svg"
             width="46"
@@ -70,13 +71,13 @@
       </div>
 
       <p class="fs-vBig fw-italicBold">
-        <span class="year-age clr-purple">--</span>years
+        <span class="clr-purple" data-years-old>--</span>years
       </p>
       <p class="fs-vBig fw-italicBold">
-        <span class="month-age clr-purple">--</span>months
+        <span class="clr-purple" data-months-old>--</span>months
       </p>
       <p class="fs-vBig fw-italicBold">
-        <span class="day-age clr-purple">--</span>days
+        <span class="clr-purple" data-days-old>--</span>days
       </p>
     </div>
 
@@ -84,7 +85,7 @@
       Challenge by
       <a href="https://www.frontendmentor.io?ref=challenge" target="_blank"
         >Frontend Mentor</a
-      >. Coded by <a href="#">Bashair</a>.
+      >. Coded by <a href="https://github.com/bashair0">Bashair</a>.
     </div>
   </body>
 </html>

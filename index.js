@@ -1,52 +1,58 @@
-/* create a dateInput variable and get the day input */
-const dateInput = document.querySelector('#day')
-/* create a monthInput variable and get the month input */
-const monthInput = document.querySelector('#month')
-/* create a yearInput variable and get the year input */
-const yearInput = document.querySelector('#year')
-/* create an inputs variable and get all inputs pf type number*/
-const inputFields = document.querySelectorAll('input[type="number"]')
-/* create labels variable and get all labels */
-const labels = document.querySelectorAll('label')
-/* create submit button variable and get the submit button */
-const submitBtn = document.querySelector('.submit-btn')
 /* get custom property color values */
 const rootStyles = getComputedStyle(document.documentElement)
 const primaryRed = rootStyles.getPropertyValue('--clr-primary-red')
 const lightGrey = rootStyles.getPropertyValue('--clr-neutral-lightGrey')
-/* create a variable currentYear and get the current year value*/
+
+const dateInput = document.querySelector('[data-day-input]')
+const monthInput = document.querySelector('[data-month-input]')
+const yearInput = document.querySelector('[data-year-input]')
+
+const inputFields = document.querySelectorAll('input[type="number"]')
+const labels = document.querySelectorAll('label')
+const submitBtn = document.querySelector('[data-submit-btn]')
+
 const currentYear = new Date().getFullYear()
-/* create a variable currentMonth and get the current month value */
 const currentMonth = new Date().getMonth() + 1
-/* create a variable currentMonth and get the current date value */
 const currentDate = new Date().getDate()
 
-/* check if any of the inputs are empty */
-/* create a variable inputValue and check if it was empty return false otherwise return true */
 function checkEmptyInput (inputValue) {
   return inputValue.trim() === '' ? false : true
   /* trim() method just accepts string type values */
 }
 
-/* check if user's year input is valid or not
-if birthYear is greater than currentYear print out "Must be in the past" */
+function displayWarningColor () {
+  inputFields.forEach(i => {
+    labels.forEach(l => {
+      l.style.color = primaryRed
+      i.style.borderColor = primaryRed
+    })
+  })
+}
+
+function removeWarningColor () {
+  inputFields.forEach(i => {
+    labels.forEach(l => {
+      l.style.color = lightGrey
+      i.style.borderColor = lightGrey
+    })
+  })
+}
+
 function checkYearValidation () {
-  const yearErrorMsg = document.querySelector('#year-validation')
+  const yearErrorMsg = document.querySelector('[data-year-errMsg]')
   let birthYear = yearInput.value
   yearErrorMsg.textContent = ''
   if (!checkEmptyInput(birthYear)) {
     yearErrorMsg.textContent = 'This field is required'
+    displayWarningColor()
+  } else if (birthYear > currentYear) {
+    yearErrorMsg.textContent = 'Must be in the past'
+    displayWarningColor()
   } else {
-    if (birthYear > currentYear) {
-      yearErrorMsg.textContent = 'Must be in the past'
-      return false
-    } else {
-      return true
-    }
+    return true
   }
 }
 
-/* check if month 2 has 28 or 29 days */
 function adjustLeapYear (year) {
   if ((year % 4 === 0 && year % 100 !== 0) || year % 400 === 0) {
     return 29
@@ -56,35 +62,33 @@ function adjustLeapYear (year) {
 }
 
 function checkMonthValidation () {
+  const monthErrorMsg = document.querySelector('[data-month-errMsg]')
   let birthMonth = monthInput.value
-  const monthErrorMsg = document.querySelector('#month-validation')
   monthErrorMsg.textContent = ''
   if (!checkEmptyInput(birthMonth)) {
     monthErrorMsg.textContent = 'This field is required'
+    displayWarningColor()
+  } else if (Number(birthMonth) < 1 || Number(birthMonth) > 12) {
+    monthErrorMsg.textContent = 'Must be a valid month'
+    displayWarningColor()
   } else {
-    if (Number(birthMonth) < 1 || Number(birthMonth) > 12) {
-      monthErrorMsg.textContent = 'Must be a valid month'
-      return false
-    } else {
-      return true
-    }
+    return true
   }
 }
 
-function checkMonth () {
-  let birthMonth = Number(monthInput.value)
-  if (!checkMonthValidation(birthMonth)) {
+function getDaysInMonth (month) {
+  let monthNumber = Number(month)
+  if (!checkMonthValidation()) {
     return false /* 'Must be a valid month' */
   } else {
     let days = 31
-    let birthYear = Number(yearInput.value)
-    if (birthMonth === 2) {
-      days = adjustLeapYear(birthYear)
+    if (monthNumber === 2) {
+      days = adjustLeapYear(Number(yearInput))
     } else if (
-      birthMonth === 4 ||
-      birthMonth === 6 ||
-      birthMonth === 9 ||
-      birthMonth === 11
+      monthNumber === 4 ||
+      monthNumber === 6 ||
+      monthNumber === 9 ||
+      monthNumber === 11
     ) {
       days = 30
     }
@@ -93,73 +97,94 @@ function checkMonth () {
 }
 
 function checkDateValidation () {
+  const dateErrorMsg = document.querySelector('[data-date-errMsg]')
   let birthDate = dateInput.value
-  let days = checkMonth()
-  const dateErrorMsg = document.querySelector('#date-validation')
+  let birthMonth = monthInput.value
+  let days = getDaysInMonth(birthMonth)
   dateErrorMsg.textContent = ''
   if (!checkEmptyInput(birthDate)) {
     dateErrorMsg.textContent = 'This field is required'
+    displayWarningColor()
+  } else if (Number(birthDate) < 1 || Number(birthDate) > 31) {
+    dateErrorMsg.textContent = 'Must be a valid day'
+    displayWarningColor()
+  } else if (Number(birthDate) > days) {
+    dateErrorMsg.textContent = 'Must be a valid date'
+    displayWarningColor()
   } else {
-    if (Number(birthDate) < 1 || Number(birthDate) > 31) {
-      dateErrorMsg.textContent = 'Must be a valid day'
-      return false
-    } else {
-      if (Number(birthDate) > days) {
-        dateErrorMsg.textContent = 'Must be a valid date'
-        return false
-      }
-      return true
-    }
+    return true
   }
 }
 
-function checkIsString (inputValue) {
-  return isNaN(inputValue) ? false : true
+function checkBirthDateValidation (year, month, day) {
+  if (!year || !month || !day) return
+  else {
+    removeWarningColor()
+    return true
+  }
 }
 
-function checkValidation (whatever) {
-  inputFields.forEach(i => {
-    labels.forEach(l => {
-      l.style.color = lightGrey
-      i.style.borderColor = lightGrey
-    })
-  })
-  if (!whatever) {
-    inputFields.forEach(i => {
-      labels.forEach(l => {
-        l.style.color = primaryRed
-        i.style.borderColor = primaryRed
-      })
-    })
-    return false
-  }
-  return true
-}
 function calculateAge () {
-  const yearAge = document.querySelector('.year-age')
-  const monthAge = document.querySelector('.month-age')
-  const dayAge = document.querySelector('.day-age')
-
-  yearAge.textContent = '--'
-  monthAge.textContent = '--'
-  dayAge.textContent = '--'
+  const yearsOldTextElement = document.querySelector('[data-years-old]')
+  const monthsOldTextElement = document.querySelector('[data-months-old]')
+  const daysOldTextElement = document.querySelector('[data-days-old]')
+  yearsOldTextElement.textContent = '--'
+  monthsOldTextElement.textContent = '--'
+  daysOldTextElement.textContent = '--'
 
   let birthDate = dateInput.value
   let birthMonth = monthInput.value
   let birthYear = yearInput.value
 
-  const checksArray = [
-    checkDateValidation(),
-    checkMonthValidation(),
-    checkYearValidation()
-  ]
-  checksArray.forEach(check => {
-    if (checkValidation(check)) {
-      yearAge.textContent = currentYear - birthYear
-      monthAge.textContent = currentMonth - birthMonth
-      dayAge.textContent = currentDate - birthDate
+  let yearsOld
+  let monthsOld
+  let daysOld
+
+  if (
+    !checkBirthDateValidation(
+      checkYearValidation(),
+      checkMonthValidation(),
+      checkDateValidation()
+    )
+  )
+    return
+  else {
+    if (birthDate == currentDate && birthMonth == currentMonth) {
+      daysOld = 0
+      monthsOld = 0
+      yearsOld = currentYear - birthYear
     }
-  })
+    if (birthDate > currentDate) {
+      monthsOld = monthsOld - 1
+      let lastMonthDays = getDaysInMonth(currentMonth - 1)
+      /* TO AVOID NEGATIVE RESULTS */
+      if (lastMonthDays == 28 && birthDate == 31 && currentDate == 1) {
+        daysOld = 0
+      } else daysOld = lastMonthDays - birthDate + currentDate + 1
+      /* THE +1 ABOVE IS TO COUNT THE CURRENT DAY ALSO */
+    } else {
+      daysOld = currentDate - birthDate
+    }
+    if (birthMonth > currentMonth) {
+      yearsOld = currentYear - birthYear - 1
+      monthsOld = 12 - birthMonth + currentMonth - 1
+    } else if (birthMonth == currentMonth) {
+      if (birthDate > currentDate) {
+        monthsOld = 11
+        yearsOld = currentYear - birthYear - 1
+      } else if (birthDate < currentDate) {
+        monthsOld = 0
+        yearsOld = currentYear - birthYear
+      }
+    } else {
+      yearsOld = currentYear - birthYear
+      monthsOld = currentMonth - birthMonth - 1
+    }
+
+    yearsOldTextElement.textContent = yearsOld
+    monthsOldTextElement.textContent = monthsOld
+    daysOldTextElement.textContent = daysOld
+  }
 }
 
 submitBtn.addEventListener('click', () => {
